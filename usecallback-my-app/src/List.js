@@ -7,8 +7,11 @@ export default function List({ getItems }) {
 
     // 調用 getItems 函數來獲取一個由三個數字組成的數組，然後使用 setItems 方法將這個數組賦值給 items 狀態
     useEffect(() => {
+        console.log('useEffect triggered.')
         setItems(getItems())
     }, [getItems])
+    // 雖然有設 dependency [getItems]，然而當任一元件改變 react 都會重新渲染，陣列中的值 number也都是重新產生的，即使值相同(記憶體位置不一樣)，react 也會視為元件屬性改變進而重新渲染。此時我們就可以使用 useCallback( 概念和 useMemo 相同)
+
 
 
 
