@@ -18,7 +18,7 @@ function App() {
       return { ...prevState, count: prevState.count - 1} 
 
       
-        return { count: prevState.count - 1}
+      return { count: prevState.count - 1}
         1. 回傳物件資料、新狀態的值 。
         2. setState 更新狀態的方式是複寫舊狀態，因此若是沒有包含舊的其他屬性(如 color)的話，更新後結果就不會有 color 屬性存在。
         解決方式: 使用 rest operater(...)將所有前一個狀態的屬性都直接包含在新的狀態值來 return 回傳。
