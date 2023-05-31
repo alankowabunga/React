@@ -79,3 +79,6 @@ h1 {
   color: #c5aeff;
   text-decoration: line-through;
 }
+p{
+  flex-grow:1;
+}

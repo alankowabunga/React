@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // 接收 TodoWrapper元件傳過來的 props，其儲存了 addTodo function 。
-export const TodoForm = (props) => { 
+export const TodoForm = ({addTodos}) => { 
     const [text, setText] = useState("");
     
     function handleSubmit(e) {
@@ -10,7 +10,7 @@ export const TodoForm = (props) => {
         e.preventDefault(); //避免頁面刷新
         
         console.log("text is:",text);
-        props.addTodos(text); //呼叫 addTodo function 傳入 text 回去給 TodoWrapper 元件。
+        addTodos(text); //呼叫 addTodo function 傳入 text 回去給 TodoWrapper 元件。
         setText("")
     }
 

@@ -18,11 +18,11 @@ export const TodoWrapper = () => {
         setTodos([
             ...todos,
             {
-                id: uuidv4,
+                id: uuidv4(),
                 task: todo,
                 completed: false,
                 isEditing: false,
-            },
+            }
         ]);
 
         console.log("current input to-do:", todo); // 檢視新狀態，
@@ -32,7 +32,13 @@ export const TodoWrapper = () => {
     
     參數 id 為 Todo Component 接收到 props.toggleComplete 屬性呼叫 toggleFunction() 、並傳入 props.tasks.id 回來當引數。*/
     const toggleFunction = (id) => {
-        setTodos(todo=>(todo.id==id)? {...todo,completed : !todo.completed }:todo);
+        console.log("toggle function executed.");
+
+        setTodos(
+            todos.map((todo) =>
+                todo.id === id ? { ...todo, completed: !todo.completed } : todo
+            )
+        );
     };
 
     return (
