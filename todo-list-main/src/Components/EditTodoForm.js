@@ -15,6 +15,7 @@ export const EditTodoForm = ({ editTodo, todo }) => {
         <form className="TodoForm" onSubmit={handleSubmit}>
             <input
                 type="text"
+                maxlength="35"
                 value={text}
                 placeholder="update task...?"
                 className="todo-input"

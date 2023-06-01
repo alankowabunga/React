@@ -32,7 +32,7 @@ h1 {
 }
 
 .TodoForm {
-  width: 100%;
+  max-width: 100%;
 }
 
 .todo-input {
@@ -69,6 +69,7 @@ h1 {
   border-radius: 5px;
   margin-bottom: 1rem;
   cursor: pointer;
+  overflow-wrap:break-word;
 }
 
 .fa-trash {
@@ -80,5 +81,6 @@ h1 {
   text-decoration: line-through;
 }
 p{
-  flex-grow:1;
+  flex-grow: 1;
+  overflow-wrap:break-word;
 }

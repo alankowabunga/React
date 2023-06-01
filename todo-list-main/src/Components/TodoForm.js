@@ -18,6 +18,7 @@ export const TodoForm = ({addTodos}) => {
         <form className="TodoForm" onSubmit={handleSubmit}>
             <input
                 type="text"
+                maxlength="35"
                 value={text}
                 placeholder="What is the task today?"
                 className="todo-input"
