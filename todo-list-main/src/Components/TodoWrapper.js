@@ -1,8 +1,10 @@
 // Parent Component
 import React, { useState } from "react";
 import { TodoForm } from "./TodoForm";
-import { v4 as uuidv4 } from "uuid";
 import { Todo } from "./Todo";
+import { v4 as uuidv4 } from "uuid";
+import { EditTodoForm } from "./EditTodoForm";
+uuidv4();
 
 export const TodoWrapper = () => {
     /* 
@@ -22,7 +24,7 @@ export const TodoWrapper = () => {
                 task: todo,
                 completed: false,
                 isEditing: false,
-            }
+            },
         ]);
 
         console.log("current input to-do:", todo); // 檢視新狀態，
@@ -41,20 +43,56 @@ export const TodoWrapper = () => {
         );
     };
 
+    const deleteFunction = (id) => {
+        console.log("delete function activated.");
+
+        // 只帶入一個參數，這個參數即表示是使用filter()此陣列的元素
+        setTodos(todos.filter((todo) => todo.id !== id));
+    };
+
+    const clickEdit = (id) => {
+        console.log("Edit Icon Clicked.");
+
+        // 如果點擊編輯 icon，就切換 isEditing 屬性為 true / false
+        setTodos(
+            todos.map((todo) =>
+                todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
+            )
+        );
+    };
+    // 更新 todo 的 task 屬性，並將 isEditing 改回原本的布林值。
+    const editFunction = (task, id) => {
+        setTodos(
+            todos.map((todo) =>
+                todo.id === id
+                    ? { ...todo, task, isEditing: !todo.isEditing }
+                    : todo
+            )
+        );
+    };
+
     return (
         <div className="TodoWrapper">
             <h1>Get Things Done !</h1>
-            {/* addTodos屬性 就是利用props儲存 addTodo函式，並且在 TodoForm 元件中接收此函式來呼叫使用傳值。*/}
 
             <TodoForm addTodos={addTodo} />
             {todos.map(
-                (eachtodo, index) => (
-                    <Todo
-                        tasks={eachtodo}
-                        key={index}
-                        toggleComplete={toggleFunction}
-                    />
-                )
+                (eachtodo, index) =>
+                    eachtodo.isEditing /*判斷 isEditing 的屬性值，決定要顯示哪一個元件 */ ? (
+                        <EditTodoForm
+                            editTodo={editFunction}
+                            todo={eachtodo}
+                            key={index}
+                        />
+                    ) : (
+                        <Todo
+                            tasks={eachtodo}
+                            key={index}
+                            toggleComplete={toggleFunction}
+                            deleteTodo={deleteFunction}
+                            clickEdit={clickEdit}
+                        />
+                    )
                 // arrow function () => 沒有大括號 {} 稱為隱式返回（implicit return），也就是沒有使用 return 關鍵字。
             )}
         </div>
