@@ -1,5 +1,5 @@
 // Parent Component
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { TodoForm } from "./TodoForm";
 import { Todo } from "./Todo";
 import { v4 as uuidv4 } from "uuid";
@@ -7,11 +7,6 @@ import { EditTodoForm } from "./EditTodoForm";
 uuidv4();
 
 export const TodoWrapper = () => {
-    /* 
-    要將 todos state 宣告在父元件，各個子元件才都能取得使用。
-    輸入值是在 TodoForm 元件接收的，要將值傳過來可以用 props 處理。
-    todos function 會接收 TodoForm 元件傳過來的 props，儲存了使用者輸入的值。
-    ->　並將值用來設定成新的 todos 陣列資料*/
 
     const [todos, setTodos] = useState([]);
 
@@ -50,17 +45,45 @@ export const TodoWrapper = () => {
         setTodos(todos.filter((todo) => todo.id !== id));
     };
 
-    const clickEdit = (id) => {
-        console.log("Edit Icon Clicked.");
+    const inputRef = useRef();
 
-        // 如果點擊編輯 icon，就切換 isEditing 屬性為 true / false
+    // 按編輯 icon，就切換 isEditing 屬性為 true / false
+    const clickEdit = (id) => {
 
         setTodos(
             todos.map((todo) =>
                 todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
             )
-        );
-    };
+        )
+    }
+
+    var inputVal = useRef("");
+    const assignVal = (id, task) => {
+        todos.forEach(todo => {
+            if (todo.id === id) {
+                console.log("value assignd:", task);
+                console.log("value type", typeof (task))//data-type: string
+
+                inputVal.current = task; // 將 task屬性值儲存
+            }
+        })
+    }
+    useEffect(() => {
+        console.log("after render find element");
+        findElement();
+    })
+    const findElement = () => {
+        console.log("current 儲存的值為:", inputVal.current)
+        var target = document.querySelector(`.todo-input[value="${inputVal.current}"]`)
+        if (target) {
+            console.log("成功取得元素、自動聚焦。")
+            target.focus();
+
+            /*編輯 icon 時自動聚焦(這裡想利用取得 DOM input[value] 失敗，因為rerender後 選擇器已經處理完抓不到渲染後的元素)。
+            解法: 先將當前點及元素的 value 屬性值儲存在 useRef.current ，並利用 useEffect 會在渲染後質性的特性，在渲染後才去呼叫 findElement function，並利用先前儲存的 useRef current屬性值找到當前元素的 value相同的目標輸入，並將其聚焦 focus */
+        }
+    }
+
     // 更新 todo 的 task 屬性，並將 isEditing 改回原本的布林值。
     const editFunction = (task, id) => {
         setTodos(
@@ -84,6 +107,7 @@ export const TodoWrapper = () => {
                             editTodo={editFunction}
                             todo={eachtodo}
                             key={index}
+                            ref={inputRef}
                         />
                     ) : (
                         <Todo
@@ -92,6 +116,7 @@ export const TodoWrapper = () => {
                             toggleComplete={toggleFunction}
                             deleteTodo={deleteFunction}
                             clickEdit={clickEdit}
+                            assignValue={assignVal}
                         />
                     )
                 // arrow function () => 沒有大括號 {} 稱為隱式返回（implicit return），也就是沒有使用 return 關鍵字。

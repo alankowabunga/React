@@ -6,11 +6,11 @@ export const TodoForm = ({addTodos}) => {
     
     function handleSubmit(e) {
 
-        // console.log(props.addTodos);
         e.preventDefault(); //避免頁面刷新
+        console.log("text is:",text)
         
-        console.log("text is:",text);
-        addTodos(text); //呼叫 addTodo function 傳入 text 回去給 TodoWrapper 元件。
+        //呼叫 addTodo function 傳入 text 回去給 TodoWrapper 元件。
+        addTodos(text)
         setText("")
     }
 
@@ -18,7 +18,6 @@ export const TodoForm = ({addTodos}) => {
         <form className="TodoForm" onSubmit={handleSubmit}>
             <input
                 type="text"
-                maxlength="35"
                 value={text}
                 placeholder="What is the task today?"
                 className="todo-input"
