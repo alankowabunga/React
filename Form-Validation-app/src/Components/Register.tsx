@@ -52,11 +52,13 @@ export const Register = () => {
         setValidMatch(match);
     }, [pwd, matchPwd]);
 
+    // submit 之後，
+
     return (
         <section className="container p-5 rounded">
             <p className=""></p>
             <h1 className="text text-white-50">Register</h1>
-            <form className="form">
+            <form className="form" onSubmit={handleSubmit}>
                 <div className="form-group my-4">
                     <label htmlFor="username" className="text text-white fs-5">
                         Username:
@@ -129,9 +131,7 @@ export const Register = () => {
                     />
                     <p
                         className={`${
-                            pwd && pwdFocus && !validPwd
-                                ? "instruction"
-                                : "offScreen"
+                            pwdFocus && !validPwd ? "instruction" : "offScreen"
                         } hint text-center mt-1 bg-dark rounded text-white`}
                     >
                         <FontAwesomeIcon
@@ -178,7 +178,7 @@ export const Register = () => {
                     />
                     <p
                         className={`${
-                            matchPwd && matchFocus && !validMatch
+                            (!matchPwd || !validMatch) && matchFocus
                                 ? "instruction"
                                 : "offScreen"
                         } hint text-center mt-1 bg-dark rounded text-white `}
@@ -193,17 +193,23 @@ export const Register = () => {
                     </p>
                 </div>
 
-                <button className="btn btn-outline-warning btn-lg">
+                <button
+                    className="btn btn-warning btn-lg"
+                    disabled={
+                        validName && validPwd && validMatch ? false : true
+                    }
+                >
                     Sign Up
                 </button>
-
-                <div className="footer mt-4">
-                    <p className="text text-white">Already registered?</p>
-                    <a href="#" className="text text-white">
-                        Sign In
-                    </a>
-                </div>
             </form>
+
+            <div className="footer mt-4">
+                <p className="text text-white">Already registered?</p>
+                {/* {put react router here} */}
+                <a href="#" className="text text-white">
+                    Sign In
+                </a>
+            </div>
         </section>
     );
 };
