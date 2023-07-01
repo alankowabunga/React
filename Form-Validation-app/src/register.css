@@ -1,0 +1,30 @@
+body{
+    height:100vh;
+    display:grid;
+    place-items: center;
+    background-color: #c6e0f7!important;
+}
+
+section{
+    background-color: #8d91f9;
+    min-width: 500px;
+    min-height:550px;
+    transform: translateX(-15%);
+}
+h1{
+    text-decoration:underline;
+}
+.instruction,.show{
+    display:block;
+}
+.hide{
+    display:none;
+}
+.offScreen{
+    position:absolute;
+    transform:translate(5000px ,5000px);
+}
+.icon{
+    font-size: 1.3em;
+    margin-left:5px
+}
