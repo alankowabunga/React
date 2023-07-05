@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,} from 'react'
 
 export const PlaceholderText = () => {
 
     const [placeholder, setPlaceholder] = useState("")
     const string = "Seearch User";
 
-    var i = 0;
-    var ph: HTMLElement | null
+    let i = 0;
+    let ph: HTMLElement | null
 
     useEffect(() => {
         ph = document.getElementById("ph")
