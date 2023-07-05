@@ -6,4 +6,8 @@
   text-align: center;
 }
 
-
+.action{
+  display:flex;
+  align-items: center;
+  justify-content: space-evenly;
+}

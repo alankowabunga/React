@@ -11,8 +11,10 @@ export const Home = () => {
     }, []);
 
     const loadUser = async () => {
-        const datas = await axios.get(BaseUrl);
-        setUser(datas.data);
+        // const datas = await axios.get(BaseUrl)
+        axios.get(BaseUrl)
+            .then((datas) => { setUser(datas.data) })
+            .catch((error) => { console.error(error) })
     };
 
     return (
