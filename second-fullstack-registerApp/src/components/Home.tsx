@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Rows } from "./Rows";
 import { Cursor, useTypewriter} from "react-simple-typewriter";
 
+export const UserContext = React.createContext();
 export const Home = () => {
+
+
     const BaseUrl = "http://localhost:8080/api/users";
     const [users, setUser] = useState([]);
     const [text] = useTypewriter({
@@ -41,9 +44,11 @@ export const Home = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user, index) => {
-                        return <Rows key={index} user={user} />;
-                    })}
+                    <UserContext.Provider value={{users,loadUser}}>
+                        {users.map((user, index) => {
+                            return <Rows key={index} user={user} loadUser={loadUser}/>;
+                        })}
+                    </UserContext.Provider>
                 </tbody>
             </table>
         </>

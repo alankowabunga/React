@@ -18,7 +18,7 @@ function App() {
                     <Route path="/navbar" element={<Navbar />} />
                     <Route path="/adduser" element={<AddUser />} />
                     <Route path="/viewuser" element={<ViewUser/>} />
-                    <Route path="/edituser" element={<EditUser/>} />
+                    <Route path="/edituser/:id" element={<EditUser/>} />
                 </Routes>
             </BrowserRouter>
         </>
