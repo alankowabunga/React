@@ -11,3 +11,22 @@
   align-items: center;
   justify-content: space-evenly;
 }
+
+.badge{
+  top:1em;
+  left:1.5em;
+  cursor:default;
+}
+.card-id{
+  position:absolute;
+  left:56%;
+}
+
+.card-title{
+  position: relative;
+  width:2.5em;
+  margin: 0 auto;
+}
+.bin{
+  cursor:pointer;
+}

@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import ClassContext from './ClassContext'
 import FunctionContext from './FunctionContext';
+import { Grandpa } from './Components/Grandpa';
 
 export const ThemeContext = React.createContext();
+
 
 function App() {
 
@@ -22,6 +24,7 @@ function App() {
         <ClassContext/>
         <FunctionContext/>
       </ThemeContext.Provider>
+      <Grandpa/>
     </>
 
   );

@@ -9,6 +9,7 @@ export const EditUser = () => {
     
     useEffect(()=>{
       loadUser()
+      console.log("edit id:", id);
     },[])
     // 使用 useState 儲存使用者輸入的值，初始值設定為個欄位名稱
     const [users,setUser] = useState({

@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Cursor, useTypewriter} from "react-simple-typewriter";
+import React, {useContext} from "react";
+import { useTypewriter} from "react-simple-typewriter";
+import { InputContext } from "../Home";
 
 export const PlaceholderText2 = () => {
 
@@ -11,12 +12,16 @@ export const PlaceholderText2 = () => {
         loop:0
     })
 
+    const context = useContext(InputContext)
+
     return (
         <input
             className="form-control me-2"
             type="search"
             id="ph"
             placeholder={`Search : ${placeholder}`}
+            value={context.input}
+            onChange={(e)=>context.setInput(e.target.value)}
         />
     );
 };
