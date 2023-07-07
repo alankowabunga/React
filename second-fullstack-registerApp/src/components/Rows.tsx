@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.css";
 
 // interface User {
 //     id: any;
@@ -36,6 +36,14 @@ export const Rows = ({ userInput }: any) => {
         getData(); //初始化取得資料
     }, []);
 
+    /* 測試 map()、filter() 方法
+    const testFilter=()=>{
+        data.filter(item=>{
+            return item.first_name.length ===3?item:null
+        }).map(item=>console.log(item))
+    }
+    testFilter();
+    */
     const getData = async () => {
         await axios
             .get("http://localhost:8080/api/users")
@@ -53,26 +61,44 @@ export const Rows = ({ userInput }: any) => {
     };
 
     return (
-        <tr className="table-group-divider">
-            <th scope="row">2</th>
-            <td>2</td>
-            <td>2</td>
-            <td className="p-2 action">
-                <Link to={`/viewuser`}>
-                    <FontAwesomeIcon
-                        icon={faMagnifyingGlassPlus}
-                        className="text-secondary"
-                    />
-                </Link>
-                <Link to={`/edituser`}>
-                    <FontAwesomeIcon icon={faPenToSquare} />
-                </Link>
-                <FontAwesomeIcon
-                    icon={faTrash}
-                    className="text-danger bin"
-                    onClick={() => deleteUser(2)}
-                />
-            </td>
-        </tr>
+        <>
+            {data
+                .filter((item) => {
+                    return userInput === ""
+                        ? item
+                        : item.first_name
+                              .toLowerCase()
+                              .includes(userInput.toLowerCase()) ||
+                              item.last_name
+                                  .toLowerCase()
+                                  .includes(userInput.toLowerCase()) ||
+                              item.email
+                                  .toLowerCase()
+                                  .includes(userInput.toLowerCase());
+                })
+                .map((item) => (
+                    <tr key={item.id} className="table-group-divider">
+                        <th>{item.id}</th>
+                        <td>{item.first_name}</td>
+                        <td>{item.email}</td>
+                        <td className="p-2 action">
+                            <Link to={`/viewuser/${item.id}`}>
+                                <FontAwesomeIcon
+                                    icon={faMagnifyingGlassPlus}
+                                    className="text-secondary"
+                                />
+                            </Link>
+                            <Link to={`/edituser/${item.id}`}>
+                                <FontAwesomeIcon icon={faPenToSquare} />
+                            </Link>
+                            <FontAwesomeIcon
+                                icon={faTrash}
+                                className="text-danger bin"
+                                onClick={() => deleteUser(item.id)}
+                            />
+                        </td>
+                    </tr>
+                ))}
+        </>
     );
 };

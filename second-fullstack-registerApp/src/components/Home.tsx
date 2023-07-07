@@ -4,8 +4,6 @@ import { Navbar } from "./Navbar";
 
 export const InputContext = React.createContext({});
 export const Home = () => {
-
-
     // 抓 Placeholder input value
     const [input, setInput] = useState("");
     const context = { input, setInput };
@@ -29,7 +27,7 @@ export const Home = () => {
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
-                <tbody>{<Rows userInput={input}/>}</tbody>
+                <tbody>{<Rows userInput={input} />}</tbody>
             </table>
         </InputContext.Provider>
     );

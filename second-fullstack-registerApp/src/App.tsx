@@ -4,14 +4,12 @@ import { ViewUser } from "./components/User/ViewUser.js";
 import { EditUser } from "./components/User/EditUser.js";
 import { Navbar } from "./components/Navbar.js";
 import { Home } from "./components/Home.js";
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
     return (
         <>
             <BrowserRouter>
-                
-
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/navbar" element={<Navbar />} />
