@@ -3,7 +3,6 @@ import { useTypewriter} from "react-simple-typewriter";
 import { InputContext } from "../Home";
 
 export const PlaceholderText2 = () => {
-
     const [placeholder] = useTypewriter({
         words:["Clark Kent","Burce Wayne","...etc"],
         typeSpeed:80,
